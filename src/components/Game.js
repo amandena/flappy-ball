@@ -3,6 +3,7 @@ import React from 'react'
 class Game extends React.Component {
   state = {
     gravity: 0.8,
+    lift: -15,
     bird: {
       x: 50,
       y: 100,
@@ -45,6 +46,16 @@ class Game extends React.Component {
       this.update()
       this.draw()
     }, 1000/60)
+    document.addEventListener("keydown", e =>
+      e.keyCode === 32 ? this.setState({ 
+        bird: {
+          x: 50,
+          y: this.state.bird.y,
+          velocity: this.state.bird.velocity + this.state.lift,
+          radius: 20
+        }
+      }) : null
+    )
   }
 
   render() {
